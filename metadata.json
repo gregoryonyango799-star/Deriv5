@@ -1,0 +1,8 @@
+{
+  "name": "AITE - Adaptive Intelligence Trading Ecosystem",
+  "description": "A high-performance trading platform combining AI psychology analysis, institutional bots, and a JARVIS-style voice assistant.",
+  "requestFramePermissions": [
+    "microphone",
+    "camera"
+  ]
+}
