@@ -3,7 +3,7 @@ import React from 'react';
 
 export const Footer: React.FC = () => {
   return (
-    <footer className="w-full max-w-full overflow-hidden bg-[#0a0a16]/95 backdrop-blur-xl border-t border-white/5 p-3 sm:p-4 md:p-8 mt-auto z-30 mb-16 md:mb-0">
+    <footer className="w-full max-w-full overflow-hidden bg-[#0a0a16]/95 backdrop-blur-xl border-t border-white/5 p-3 sm:p-4 md:p-8 z-30 mb-0 fixed bottom-0 left-0 right-0 sm:relative">
       <div className="max-w-[1600px] mx-auto grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4 md:gap-12 w-full">
         <div className="space-y-3 md:space-y-4 col-span-2 md:col-span-1">
           <div className="flex items-center gap-2">
