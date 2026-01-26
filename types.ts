@@ -22,6 +22,17 @@ export interface BotStrategy {
   winRate: number;
   totalTrades: number;
   pnl: number;
+  symbol?: string;
+  contractType?: 'CALL' | 'PUT' | 'DIGITEVEN' | 'DIGITODD';
+  duration?: number;
+  durationUnit?: 'm' | 't' | 's' | 'h' | 'd';
+  amount?: number;
+  martingale?: boolean;
+  martingaleMultiplier?: number;
+  maxMartingaleSteps?: number;
+  takeProfit?: number;
+  stopLoss?: number;
+  maxTrades?: number;
 }
 
 export interface PsychologyMetrics {
@@ -34,4 +45,34 @@ export interface PsychologyMetrics {
 export interface JarvisMessage {
   role: 'user' | 'assistant' | 'system';
   content: string;
+}
+
+export interface AppSettings {
+  // Risk Settings
+  maxRiskPerTrade: number;
+  dailyLossLimit: number;
+  maxOpenTrades: number;
+  enableStopLoss: boolean;
+  enableTakeProfit: boolean;
+  
+  // API Settings
+  derivApiKey: string;
+  geminiApiKey: string;
+  
+  // Trading Settings
+  defaultSymbol: string;
+  defaultAmount: number;
+  defaultDuration: number;
+  defaultDurationUnit: 'm' | 't' | 's' | 'h' | 'd';
+  autoExecution: boolean;
+  soundAlerts: boolean;
+  
+  // JARVIS Settings
+  jarvisVoice: 'Sophisticated' | 'Military' | 'Concise';
+  jarvisAutoAnalysis: boolean;
+  
+  // Display Settings
+  theme: 'dark' | 'light' | 'cyber';
+  chartType: 'candles' | 'line' | 'area';
+  showVolume: boolean;
 }

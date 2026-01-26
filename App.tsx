@@ -1,5 +1,4 @@
-
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Dashboard } from './components/Dashboard';
 import { Intelligence } from './components/Intelligence';
 import { Psychology } from './components/Psychology';
@@ -9,20 +8,61 @@ import { Settings } from './components/Settings';
 import { EquityTrajectory } from './components/EquityTrajectory';
 import { JarvisAssistant } from './components/JarvisAssistant';
 import { Profile } from './components/Profile';
+import { Positions } from './components/Positions';
 import { Footer } from './components/Footer';
+import { Login } from './components/Login';
+import { deriv } from './services/derivService';
+import { ICONS } from './constants';
 
 const App: React.FC = () => {
   const [activeTab, setActiveTab] = useState('dashboard');
   const [isSidebarHovered, setIsSidebarHovered] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [isCheckingAuth, setIsCheckingAuth] = useState(true);
+
+  useEffect(() => {
+    deriv.connect().then(() => {
+      setIsLoggedIn(true);
+      setIsCheckingAuth(false);
+      
+      // Restore running bots after connection is established
+      console.log('App: Restoring bots...');
+      deriv.restoreBots();
+    }).catch((err) => {
+      console.error('App init auth error:', err);
+      setIsCheckingAuth(false);
+    });
+  }, []);
+
+  const handleLoginSuccess = () => {
+    setIsLoggedIn(true);
+  };
+
+  if (isCheckingAuth) {
+    return (
+      <div className="min-h-screen bg-[#0a0a14] flex items-center justify-center">
+        <div className="text-center">
+          <h2 className="text-2xl font-black text-white">AITE</h2>
+          <p className="text-cyan-400">Initializing Neural Uplink...</p>
+        </div>
+      </div>
+    );
+  }
+
+  if (!isLoggedIn) {
+    // This part is now bypassed but kept for future use
+    return <Login onLoginSuccess={handleLoginSuccess} />;
+  }
 
   const navItems = [
-    { id: 'dashboard', label: 'Terminal', icon: '📊' },
-    { id: 'trajectory', label: 'Analysis', icon: '📈' },
-    { id: 'intelligence', label: 'Intelligence', icon: '🧠' },
-    { id: 'psychology', label: 'Neuro', icon: '⚡' },
-    { id: 'bots', label: 'Bots', icon: '🤖' },
-    { id: 'journal', label: 'Logs', icon: '📓' },
-    { id: 'settings', label: 'Config', icon: '⚙️' },
+    { id: 'dashboard', label: 'Terminal', icon: <ICONS.Terminal className="w-5 h-5"/> },
+    { id: 'trajectory', label: 'Analysis', icon: <ICONS.Analysis className="w-5 h-5"/> },
+    { id: 'positions', label: 'Positions', icon: <ICONS.Intelligence className="w-5 h-5"/> },
+    { id: 'intelligence', label: 'Intelligence', icon: <ICONS.Intelligence className="w-5 h-5"/> },
+    { id: 'psychology', label: 'Neuro', icon: <ICONS.Neuro className="w-5 h-5"/> },
+    { id: 'bots', label: 'Bots', icon: <ICONS.Bot className="w-5 h-5"/> },
+    { id: 'journal', label: 'Logs', icon: <ICONS.Logs className="w-5 h-5"/> },
+    { id: 'settings', label: 'Config', icon: <ICONS.Settings className="w-5 h-5"/> },
   ];
 
   const renderContent = () => {
@@ -34,6 +74,7 @@ const App: React.FC = () => {
       case 'journal': return <TradeJournal />;
       case 'settings': return <Settings />;
       case 'trajectory': return <EquityTrajectory />;
+      case 'positions': return <Positions />;
       case 'profile': return <Profile />;
       default: return <Dashboard />;
     }
@@ -71,7 +112,7 @@ const App: React.FC = () => {
                 : 'text-gray-500 hover:text-gray-300 hover:bg-white/5'
               }`}
             >
-              <span className={`text-xl transition-transform group-hover:scale-125 ${activeTab === item.id ? 'scale-110' : ''}`}>{item.icon}</span>
+              <span className={`transition-transform group-hover:scale-125 ${activeTab === item.id ? 'scale-110' : ''}`}>{item.icon}</span>
               {isSidebarHovered && (
                 <span className="font-bold text-xs tracking-widest uppercase whitespace-nowrap overflow-hidden">
                   {item.label}
@@ -134,16 +175,16 @@ const App: React.FC = () => {
       </main>
 
       {/* Mobile Bottom Navigation */}
-      <div className="md:hidden fixed bottom-0 left-0 right-0 h-16 bg-[#0a0a16]/95 border-t border-white/10 backdrop-blur-3xl z-50 flex justify-around items-center px-2">
-        {navItems.slice(0, 5).map((item) => (
+      <div className="md:hidden fixed bottom-0 left-0 right-0 h-16 bg-[#0a0a16]/95 border-t border-white/10 backdrop-blur-3xl z-50 flex justify-around items-center px-1 safe-area-inset-bottom">
+        {navItems.map((item) => (
           <button
             key={item.id}
             onClick={() => setActiveTab(item.id)}
-            className={`flex flex-col items-center gap-1 transition-all ${activeTab === item.id ? 'text-cyan-400' : 'text-gray-500'}`}
+            className={`flex flex-col items-center justify-center gap-0.5 py-2 px-2 rounded-lg transition-all ${activeTab === item.id ? 'text-cyan-400 bg-cyan-500/10' : 'text-gray-500'}`}
           >
-            <span className="text-xl">{item.icon}</span>
-            <span className="text-[8px] font-black uppercase tracking-tighter">{item.label}</span>
-            {activeTab === item.id && <div className="w-1 h-1 bg-cyan-400 rounded-full mt-0.5" />}
+            <span>{item.icon}</span>
+            <span className="text-[7px] font-black uppercase tracking-tighter">{item.label}</span>
+            {activeTab === item.id && <div className="w-1 h-1 bg-cyan-400 rounded-full" />}
           </button>
         ))}
       </div>
