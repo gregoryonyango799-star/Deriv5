@@ -3,8 +3,8 @@ import React from 'react';
 
 export const Footer: React.FC = () => {
   return (
-    <footer className="w-full bg-[#0a0a16] border-t border-white/5 p-4 md:p-8 mt-auto z-40 mb-16 md:mb-0">
-      <div className="max-w-[1600px] mx-auto grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-12">
+    <footer className="w-full max-w-full overflow-hidden bg-[#0a0a16] border-t border-white/5 p-4 md:p-8 mt-auto z-40 mb-16 md:mb-0">
+      <div className="max-w-[1600px] mx-auto grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-12 w-full">
         <div className="space-y-3 md:space-y-4 col-span-2 md:col-span-1">
           <div className="flex items-center gap-2">
             <div className="w-7 h-7 md:w-8 md:h-8 bg-cyan-500 rounded flex items-center justify-center text-black font-black text-sm">A</div>

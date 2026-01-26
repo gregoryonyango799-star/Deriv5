@@ -122,7 +122,7 @@ const BotCard: React.FC<BotCardProps> = ({
       </div>
 
       {/* Action Buttons */}
-      <div className="flex gap-2">
+      <div className="flex gap-1 sm:gap-2 w-full">
         <button
           onClick={onEdit}
           className="flex-1 py-2 px-3 bg-white/5 hover:bg-white/10 border border-white/10 rounded-xl text-[10px] font-black uppercase tracking-wider transition-all"
@@ -853,16 +853,15 @@ export const BotManagement: React.FC = () => {
   const activeCount = runningBots.size;
 
   return (
-    <div className="p-4 md:p-6 space-y-6 animate-in fade-in duration-700">
+    <div className="p-2 sm:p-4 md:p-6 space-y-4 sm:space-y-6 animate-in fade-in duration-700 w-full max-w-full overflow-x-hidden">
       {/* Header */}
-      <div className="flex flex-col lg:flex-row justify-between items-start lg:items-center gap-4">
-        <div>
-          <h2 className="text-xl font-black uppercase tracking-widest text-white">Bot Management</h2>
+      <div className="flex flex-col lg:flex-row justify-between items-start lg:items-center gap-4 w-full">
+        <div className="w-full lg:w-auto">
+          <h2 className="text-lg sm:text-xl font-black uppercase tracking-widest text-white">Bot Management</h2>
           <p className="text-[10px] text-gray-500 font-bold tracking-widest uppercase">Automated Trading Strategies</p>
         </div>
         
-        <div className="flex items-center gap-4">
-          {/* Connection Status */}
+        <div className="flex items-center gap-2 sm:gap-4 flex-wrap w-full lg:w-auto">{/* Connection Status */}
           <div className={`flex items-center gap-2 px-4 py-2 rounded-xl border ${
             isConnected ? 'border-emerald-500/30 bg-emerald-500/10' : 'border-rose-500/30 bg-rose-500/10'
           }`}>
@@ -919,7 +918,7 @@ export const BotManagement: React.FC = () => {
       </div>
 
       {/* Bot Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4">
+      <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-3 sm:gap-4 w-full">
         {bots.map((bot) => (
           <BotCard
             key={bot.id}

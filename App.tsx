@@ -81,7 +81,7 @@ const App: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen bg-[#0d0d1a] text-slate-200 flex flex-col md:flex-row overflow-x-hidden">
+    <div className="min-h-screen bg-[#0d0d1a] text-slate-200 flex flex-col md:flex-row overflow-x-hidden w-full max-w-full">
       {/* Sidebar - Desktop */}
       <nav 
         onMouseEnter={() => setIsSidebarHovered(true)}
@@ -139,8 +139,8 @@ const App: React.FC = () => {
       </nav>
 
       {/* Main Content Area */}
-      <main className="flex-1 h-screen overflow-y-auto custom-scrollbar relative bg-[radial-gradient(circle_at_top_right,rgba(6,182,212,0.05),transparent_40%)] flex flex-col pb-20 md:pb-0">
-        <header className="sticky top-0 z-30 flex items-center justify-between p-4 md:p-6 glass-panel border-b border-white/5 backdrop-blur-3xl">
+      <main className="flex-1 h-screen overflow-y-auto overflow-x-hidden custom-scrollbar relative bg-[radial-gradient(circle_at_top_right,rgba(6,182,212,0.05),transparent_40%)] flex flex-col pb-20 md:pb-0 w-full max-w-full">
+        <header className="sticky top-0 z-30 flex items-center justify-between p-4 md:p-6 glass-panel border-b border-white/5 backdrop-blur-3xl w-full max-w-full">
           <div className="flex items-center gap-3 md:gap-4">
             <h1 className="text-lg md:text-2xl font-black uppercase tracking-tighter bg-gradient-to-r from-white via-cyan-400 to-gray-500 bg-clip-text text-transparent truncate max-w-[150px] md:max-w-none">
               {activeTab === 'dashboard' ? 'Neural Terminal' : activeTab}
@@ -166,7 +166,7 @@ const App: React.FC = () => {
           </div>
         </header>
 
-        <div className="max-w-[1600px] mx-auto w-full flex-1">
+        <div className="max-w-[1600px] mx-auto w-full flex-1 px-2 md:px-4">
           {renderContent()}
         </div>
 
