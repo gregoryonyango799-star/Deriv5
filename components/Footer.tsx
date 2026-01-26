@@ -5,7 +5,7 @@ export const Footer: React.FC = () => {
   const [open, setOpen] = useState<{ about: boolean; links: boolean }>(() => ({ about: false, links: false }));
 
   return (
-    <footer className="w-full max-w-full overflow-hidden bg-[#0a0a16]/95 backdrop-blur-xl border-t border-white/5 p-3 sm:p-4 md:p-8 mt-auto z-40 mb-20 md:mb-0">
+    <footer className="w-full max-w-full overflow-hidden bg-[#0a0a16]/95 backdrop-blur-xl border-t border-white/5 p-3 sm:p-4 md:p-8 mt-auto z-40 mb-2 md:mb-0 pb-6 md:pb-0">
       <div className="max-w-[1600px] mx-auto w-full">
         {/* Mobile condensed header */}
         <div className="flex items-center justify-between md:hidden mb-3">
@@ -105,7 +105,7 @@ export const Footer: React.FC = () => {
         </div>
 
         {/* Bottom skinny bar */}
-        <div className="mt-4 border-t border-white/5 pt-3 flex items-center justify-between text-xs text-gray-400">
+        <div className="mt-2 border-t border-white/5 pt-2 flex items-center justify-between text-xs text-gray-400">
           <div className="flex items-center gap-3">
             <div className="hidden md:flex items-center gap-2">
               <span className="text-[11px] text-gray-400">Made with ❤️ in AITE Labs</span>
