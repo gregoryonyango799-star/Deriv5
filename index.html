@@ -94,9 +94,22 @@
     }
     
     /* Hide scrollbar utility */
-    .scrollbar-hide {
+    .scrollbar-hide,
+    .no-scrollbar {
       -ms-overflow-style: none;
       scrollbar-width: none;
+    }
+    .scrollbar-hide::-webkit-scrollbar,
+    .no-scrollbar::-webkit-scrollbar {
+      display: none;
+    }
+    
+    /* Smooth horizontal scrolling on mobile */
+    @media (max-width: 768px) {
+      .overflow-x-auto {
+        scroll-behavior: smooth;
+        -webkit-overflow-scrolling: touch;
+      }
     }
     .scrollbar-hide::-webkit-scrollbar {
       display: none;

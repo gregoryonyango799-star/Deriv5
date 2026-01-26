@@ -195,24 +195,37 @@ export const MarketWatch: React.FC<MarketWatchProps> = ({ onSelect, activeSymbol
       </div>
 
       {/* Category Tabs */}
-      <div className="flex gap-2 overflow-x-auto pb-2 scrollbar-hide">
+      <div className="flex gap-2 overflow-x-auto pb-2 px-1 -mx-1 no-scrollbar">
+        <style jsx>{`
+          .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+          }
+          .no-scrollbar::-webkit-scrollbar {
+            display: none;
+          }
+        `}</style>
         {MARKET_CATEGORIES.map(cat => (
           <button
             key={cat.id}
             onClick={() => setSelectedCategory(cat.id)}
-            className={`flex items-center gap-2 px-4 py-2 rounded-xl text-[10px] font-black uppercase tracking-wider whitespace-nowrap transition-all ${
+            className={`flex items-center gap-1.5 sm:gap-2 px-3 sm:px-4 py-2.5 rounded-xl text-[9px] sm:text-[10px] font-black uppercase tracking-wider whitespace-nowrap transition-all flex-shrink-0 ${
               selectedCategory === cat.id
-                ? 'bg-cyan-500/20 text-cyan-400 border border-cyan-500/30'
-                : 'bg-black/20 text-gray-500 border border-white/5 hover:bg-white/5 hover:text-gray-300'
+                ? 'bg-cyan-500/20 text-cyan-400 border border-cyan-500/30 shadow-[0_0_15px_rgba(6,182,212,0.2)]'
+                : 'bg-black/30 text-gray-500 border border-white/5 hover:bg-white/5 hover:text-gray-300'
             }`}
           >
-            <span>{cat.icon}</span>
+            <span className="text-sm">{cat.icon}</span>
             <span>{cat.label}</span>
-            <span className="bg-black/40 px-1.5 py-0.5 rounded text-[8px]">
+            <span className="bg-black/40 px-1.5 py-0.5 rounded text-[8px] font-mono">
               {marketCounts[cat.id] || 0}
             </span>
           </button>
         ))}
+        {/* Scroll indicator hint */}
+        <div className="flex items-center px-2 text-gray-600 text-xs whitespace-nowrap">
+          <span>→</span>
+        </div>
       </div>
 
       {/* Market Grid */}
