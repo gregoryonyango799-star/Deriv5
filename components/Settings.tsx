@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { deriv, DerivAccount } from '../services/derivService';
+import { jarvis } from '../services/geminiService';
 import { DEFAULT_SETTINGS } from '../constants';
 import { AppSettings } from '../types';
 
@@ -83,6 +84,11 @@ export const Settings: React.FC = () => {
       // Update Deriv API key
       if (settings.derivApiKey) {
         deriv.setApiKey(settings.derivApiKey);
+      }
+      
+      // Update Gemini API key
+      if (settings.geminiApiKey) {
+        jarvis.setApiKey(settings.geminiApiKey);
       }
       
       setSaveMessage({ type: 'success', text: 'Settings saved successfully!' });
@@ -356,7 +362,7 @@ export const Settings: React.FC = () => {
                     value={settings.derivApiKey || ''}
                     onChange={(e) => setSettings({ ...settings, derivApiKey: e.target.value })}
                     className="w-full bg-black/30 border border-cyan-500/30 rounded-xl px-4 py-3 text-sm focus:border-cyan-500/50 focus:outline-none font-mono"
-                    placeholder="Enter Deriv API Token (mGcPVj7dP04873c)"
+                    placeholder="Enter Deriv API Token"
                   />
                   <button
                     onClick={() => setShowApiKey(!showApiKey)}

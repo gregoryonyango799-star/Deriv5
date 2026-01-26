@@ -254,7 +254,7 @@ export class TechnicalIndicators {
 export class DerivService {
   private socket: WebSocket | null = null;
   private listeners: Set<(data: any) => void> = new Set();
-  private apiKey: string = 'mGcPVj7dP04873c'; // Hardcoded API key
+  private apiKey: string = ''; // API key set at runtime via login/settings; do NOT hardcode secrets
   private messageQueue: string[] = [];
   private isAuthorized: boolean = false;
   private reconnectAttempts: number = 0;

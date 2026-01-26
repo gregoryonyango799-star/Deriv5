@@ -661,12 +661,15 @@ export const Dashboard: React.FC = () => {
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 md:gap-6">
         <div className={`lg:col-span-2 glass-panel p-4 md:p-6 rounded-3xl min-h-[450px] ${isFullscreen ? 'fixed inset-4 z-50 h-auto' : 'md:h-[580px]'} relative overflow-hidden flex flex-col border border-white/5`}>
           {/* Chart Header */}
-          <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-4 z-10">
-            <div className="flex flex-col">
-               <h3 className="text-xs font-black uppercase tracking-widest text-white flex items-center gap-2">
-                 {symbolName} <div className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
+          <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3 mb-3 z-10">
+            <div className="flex items-center gap-2">
+               <h3 className="text-xs sm:text-sm font-black uppercase tracking-widest text-white">
+                 {symbolName}
                </h3>
-               <span className="text-[8px] text-gray-500 font-mono">{symbol} | LIVE</span>
+               <div className="flex items-center gap-1 px-2 py-0.5 bg-emerald-500/20 rounded-full border border-emerald-500/30">
+                 <div className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
+                 <span className="text-[8px] font-black text-emerald-400 uppercase">LIVE</span>
+               </div>
             </div>
             
             {/* Chart Type Selector */}
@@ -690,9 +693,9 @@ export const Dashboard: React.FC = () => {
           </div>
 
           {/* Toolbar */}
-          <div className="flex flex-wrap gap-2 mb-4 z-10">
+          <div className="flex flex-wrap gap-1.5 sm:gap-2 mb-3 z-10">
             {/* Timeframes */}
-            <div className="flex gap-1 bg-black/30 rounded-lg p-1">
+            <div className="flex gap-0.5 sm:gap-1 bg-black/30 rounded-lg p-0.5 sm:p-1">
               {[
                 { val: 60, label: 'M1' },
                 { val: 300, label: 'M5' },
@@ -704,7 +707,7 @@ export const Dashboard: React.FC = () => {
                 <button 
                   key={val}
                   onClick={() => setGranularity(val)}
-                  className={`text-[9px] font-mono px-2.5 py-1.5 rounded transition-colors ${
+                  className={`text-[8px] sm:text-[9px] font-mono px-2 sm:px-2.5 py-1 sm:py-1.5 rounded transition-colors ${
                     granularity === val 
                       ? 'bg-cyan-500/20 text-cyan-400 border border-cyan-500/30' 
                       : 'text-gray-500 hover:bg-white/5 hover:text-gray-300'

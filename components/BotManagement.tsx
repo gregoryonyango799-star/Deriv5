@@ -59,14 +59,14 @@ const BotCard: React.FC<BotCardProps> = ({
         </div>
         <button 
           onClick={onToggle}
-          className={`w-14 h-7 sm:w-12 sm:h-6 rounded-full relative transition-all flex-shrink-0 ${
+          className={`w-11 h-6 sm:w-12 sm:h-6 rounded-full relative transition-all flex-shrink-0 ${
             bot.active 
               ? 'bg-gradient-to-r from-cyan-500 to-cyan-600 shadow-[0_0_12px_rgba(6,182,212,0.4)]' 
               : 'bg-gray-700 hover:bg-gray-600'
           }`}
         >
-          <div className={`absolute top-0.5 w-6 h-6 sm:w-5 sm:h-5 sm:top-0.5 rounded-full bg-white transition-all shadow-lg ${
-            bot.active ? 'right-0.5 sm:right-1' : 'left-0.5 sm:left-1'
+          <div className={`absolute top-0.5 w-5 h-5 rounded-full bg-white transition-all shadow-lg ${
+            bot.active ? 'right-0.5' : 'left-0.5'
           }`} />
         </button>
       </div>

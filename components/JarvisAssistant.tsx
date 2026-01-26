@@ -38,14 +38,19 @@ export const JarvisAssistant: React.FC = () => {
     <>
       <button 
         onClick={() => setIsOpen(!isOpen)}
-        className="fixed bottom-20 md:bottom-6 right-4 md:right-6 w-16 h-16 md:w-20 md:h-20 group z-[60] transition-all hover:scale-110 active:scale-95 flex items-center justify-center"
+        aria-label="Open JARVIS Assistant"
+        className="fixed bottom-20 md:bottom-6 right-4 md:right-6 w-14 h-14 md:w-16 md:h-16 group z-[60] transition-all hover:scale-110 active:scale-95 flex items-center justify-center"
       >
-        <div className="absolute inset-0 bg-cyan-400/20 rounded-full blur-2xl group-hover:bg-cyan-400/40 animate-pulse"></div>
-        <div className="relative w-12 h-12 md:w-16 md:h-16 bg-black rounded-full border-4 border-[#1a1a2e] shadow-[0_0_20px_rgba(6,182,212,0.4)] flex items-center justify-center">
-           <svg viewBox="0 0 100 100" className="w-8 h-8 md:w-10 md:h-10 text-cyan-400 drop-shadow-[0_0_8px_rgba(34,211,238,0.9)]">
-              <circle cx="50" cy="50" r="45" fill="none" stroke="currentColor" strokeWidth="2" strokeDasharray="15 10" className="animate-[spin_40s_linear_infinite]" />
-              <circle cx="50" cy="50" r="10" fill="currentColor" className="animate-pulse" />
-           </svg>
+        {/* Outer glow ring */}
+        <div className="absolute inset-0 bg-gradient-to-br from-cyan-500 via-indigo-600 to-purple-700 rounded-full animate-pulse opacity-40 blur-xl" />
+        {/* Main gradient background */}
+        <div className="absolute inset-0 bg-gradient-to-br from-cyan-500 via-indigo-600 to-purple-700 rounded-full opacity-90 group-hover:opacity-100 transition-all shadow-[0_0_30px_rgba(6,182,212,0.6)]" />
+        {/* Inner content */}
+        <div className="absolute inset-1 bg-black/40 backdrop-blur-lg rounded-full flex items-center justify-center border border-white/20">
+          <div className="relative">
+            <span className="text-xl md:text-2xl font-black text-transparent bg-clip-text bg-gradient-to-br from-cyan-300 via-white to-purple-300 drop-shadow-[0_0_8px_rgba(6,182,212,0.8)]">AI</span>
+            <div className="absolute -inset-2 bg-cyan-400/20 blur-md rounded-full animate-pulse" />
+          </div>
         </div>
       </button>
 

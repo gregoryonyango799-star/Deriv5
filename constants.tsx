@@ -123,8 +123,8 @@ export const DEFAULT_SETTINGS = {
   maxOpenTrades: 5,
   enableStopLoss: true,
   enableTakeProfit: true,
-  derivApiKey: 'mGcPVj7dP04873c',
-  geminiApiKey: 'AIzaSyAnZOPC9wJSTXYMzxeaqtEnwH1EakuK0tw',
+  derivApiKey: '', // Will be set via login
+  geminiApiKey: '', // Will be set in Settings - get from https://makersuite.google.com/app/apikey
   defaultSymbol: 'R_100',
   defaultAmount: 1,
   defaultDuration: 1,

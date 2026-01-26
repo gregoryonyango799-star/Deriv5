@@ -12,6 +12,7 @@ import { Positions } from './components/Positions';
 import { Footer } from './components/Footer';
 import { Login } from './components/Login';
 import { deriv } from './services/derivService';
+import { jarvis } from './services/geminiService';
 import { ICONS } from './constants';
 
 const App: React.FC = () => {
@@ -21,36 +22,66 @@ const App: React.FC = () => {
   const [isCheckingAuth, setIsCheckingAuth] = useState(true);
 
   useEffect(() => {
-    deriv.connect().then(() => {
-      setIsLoggedIn(true);
+    // Initialize Gemini service with stored API key
+    try {
+      const settings = localStorage.getItem('aite_settings');
+      if (settings) {
+        const parsed = JSON.parse(settings);
+        if (parsed.geminiApiKey) {
+          jarvis.setApiKey(parsed.geminiApiKey);
+          console.log('App: Gemini API key loaded from settings');
+        }
+      }
+    } catch (e) {
+      console.error('App: Failed to load Gemini API key:', e);
+    }
+
+    // Check if user has stored tokens or API key
+    const tokens = deriv.getStoredTokens();
+    
+    if (Object.keys(tokens).length > 0) {
+      // Try to connect with stored token
+      const firstToken = Object.values(tokens)[0];
+      deriv.connect(firstToken).then(() => {
+        setIsLoggedIn(true);
+        setIsCheckingAuth(false);
+        
+        // Restore running bots after connection is established
+        console.log('App: Restoring bots...');
+        deriv.restoreBots();
+      }).catch((err) => {
+        console.error('App init auth error:', err);
+        setIsCheckingAuth(false);
+        setIsLoggedIn(false);
+      });
+    } else {
+      // No stored tokens, require login
       setIsCheckingAuth(false);
-      
-      // Restore running bots after connection is established
-      console.log('App: Restoring bots...');
-      deriv.restoreBots();
-    }).catch((err) => {
-      console.error('App init auth error:', err);
-      setIsCheckingAuth(false);
-    });
+      setIsLoggedIn(false);
+    }
   }, []);
 
   const handleLoginSuccess = () => {
     setIsLoggedIn(true);
+    // Restore bots after successful login
+    setTimeout(() => {
+      deriv.restoreBots();
+    }, 1000);
   };
 
   if (isCheckingAuth) {
     return (
       <div className="min-h-screen bg-[#0a0a14] flex items-center justify-center">
         <div className="text-center">
+          <div className="w-16 h-16 border-4 border-cyan-500/30 border-t-cyan-500 rounded-full animate-spin mx-auto mb-4" />
           <h2 className="text-2xl font-black text-white">AITE</h2>
-          <p className="text-cyan-400">Initializing Neural Uplink...</p>
+          <p className="text-cyan-400 mt-2">Initializing Neural Uplink...</p>
         </div>
       </div>
     );
   }
 
   if (!isLoggedIn) {
-    // This part is now bypassed but kept for future use
     return <Login onLoginSuccess={handleLoginSuccess} />;
   }
 

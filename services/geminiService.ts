@@ -1,4 +1,3 @@
-const GEMINI_API_KEY = 'AIzaSyCuiwrYTV2zV-pNkYysAU10WVFs-Vo3xhc';
 const API_BASE = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-lite:generateContent';
 
 export interface TradingSignal {
@@ -16,9 +15,35 @@ export interface TradingSignal {
 }
 
 export class GeminiService {
+  private apiKey: string = '';
+
+  setApiKey(key: string) {
+    this.apiKey = key;
+  }
+
+  getApiKey(): string {
+    // Try to get from localStorage settings first
+    try {
+      const settings = localStorage.getItem('aite_settings');
+      if (settings) {
+        const parsed = JSON.parse(settings);
+        if (parsed.geminiApiKey) {
+          this.apiKey = parsed.geminiApiKey;
+        }
+      }
+    } catch (e) {
+      console.error('Failed to load Gemini API key from settings:', e);
+    }
+    return this.apiKey;
+  }
   
   private async callGemini(prompt: string): Promise<string> {
-    const response = await fetch(`${API_BASE}?key=${GEMINI_API_KEY}`, {
+    const apiKey = this.getApiKey();
+    if (!apiKey) {
+      throw new Error('Gemini API key not configured. Please set it in Settings.');
+    }
+
+    const response = await fetch(`${API_BASE}?key=${apiKey}`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
