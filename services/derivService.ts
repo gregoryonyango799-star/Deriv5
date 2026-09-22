@@ -5,16 +5,16 @@ const DERIV_WS_URL = `wss://ws.derivws.com/websockets/v3?app_id=${APP_ID}`;
 
 export interface DerivAccount {
   loginid: string;
-  balance: number;
-  currency: string;
-  account_type: string;
-  is_virtual: number;
-  token?: string;
-  landing_company_name?: string;
-}
-
-export interface ActiveSymbol {
-  symbol: string;
+    balance: number;
+      currency: string;
+        account_type: string;
+          is_virtual: number;
+            token?: string;
+              landing_company_name?: string;
+              }
+              
+              export interface ActiveSymbol {
+.  symbol: string;
   display_name: string;
   market: string;
   market_display_name: string;
