@@ -1,6 +1,6 @@
 
 // Deriv API Configuration
-const APP_ID = 86454; // Your specific app ID for account switching
+const APP_ID = 1089; // Your specific app ID for account switching
 const DERIV_WS_URL = `wss://ws.derivws.com/websockets/v3?app_id=${APP_ID}`;
 
 export interface DerivAccount {
